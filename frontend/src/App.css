@@ -1,3 +1,9 @@
+/* Breakpoints:
+   mobile: 0px+ (базові стилі)
+   tablet: 600px+ (@media (min-width: 600px))
+   desktop: 1024px+ (@media (min-width: 1024px))
+*/
+
 body {
   margin: 0;
   font-family: sans-serif;
@@ -43,4 +49,56 @@ body {
     align-items: flex-start;
     padding: 10px 12px;
   }
+}
+
+.app-container {
+  padding: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .app-container {
+    padding: 24px;
+  }
+}
+
+.task-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  list-style: none;
+  padding: 0;
+}
+
+@media (min-width: 600px) {
+  .task-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .task-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.app-header {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px;
+}
+
+@media (min-width: 600px) {
+  .app-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(1.25rem, 4vw, 2rem);
 }
