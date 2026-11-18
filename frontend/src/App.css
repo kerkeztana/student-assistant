@@ -102,3 +102,13 @@ body {
   margin: 0;
   font-size: clamp(1.25rem, 4vw, 2rem);
 }
+
+.storage-status {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0 0 1rem;
+}
+
+.storage-error {
+  color: #b71c1c;
+}
