@@ -38,7 +38,7 @@ body {
   border-left: 4px solid #2a9d8f;
 }
 
-.task-card.completed span:first-child {
+.task-card.completed span:first-of-type {
   text-decoration: line-through;
   opacity: 0.6;
 }
@@ -101,14 +101,4 @@ body {
 .app-header h1 {
   margin: 0;
   font-size: clamp(1.25rem, 4vw, 2rem);
-}
-
-.storage-status {
-  font-size: 0.9rem;
-  color: #555;
-  margin: 0 0 1rem;
-}
-
-.storage-error {
-  color: #b71c1c;
 }

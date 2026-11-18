@@ -9,13 +9,18 @@ const StyledCard = styled.li`
     ${(props) => (props.$priority === "high" ? "#e63946" : "#2a9d8f")};
 `;
 
-function TaskItem({ task }) {
+function TaskItem({ task, onToggle }) {
   return (
     <li
       className={`task-card priority-${task.priority} ${
         task.completed ? "completed" : ""
       }`}
     >
+      <input
+        type="checkbox"
+        checked={task.completed}
+        onChange={() => onToggle(task.id)}
+      />
       <span>{task.title}</span>
       <span>{task.priority}</span>
     </li>

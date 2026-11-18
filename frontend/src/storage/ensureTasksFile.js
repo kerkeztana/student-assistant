@@ -1,9 +1,6 @@
-// Початковий вміст нового файлу: порожній масив завдань.
 const INITIAL_CONTENT = "[]\n";
 
-// Повертає модулі Node, якщо код працює у вікні NW.js.
-// У звичайному браузері (npm run dev) повертає null.
-function getNode() {
+export function getNode() {
   if (typeof window !== "undefined" && window.require) {
     return {
       fs: window.require("fs"),
@@ -13,15 +10,11 @@ function getNode() {
   return null;
 }
 
-// NW.js запускається з теки frontend/dist, тому до
-// data/tasks.json піднімаємось на два рівні вгору.
-function getDataPath(node) {
+export function getDataPath(node) {
   const cwd = window.process.cwd();
   return node.path.resolve(cwd, "..", "..", "data", "tasks.json");
 }
 
-// Гарантує, що файл data/tasks.json існує.
-// Повертає об'єкт: { status, path, size }
 export async function ensureTasksFile() {
   const node = getNode();
   if (!node) return { status: "unavailable" };
@@ -29,13 +22,9 @@ export async function ensureTasksFile() {
   const filePath = getDataPath(node);
   const dir = node.path.dirname(filePath);
 
-  // 1. Теку data створюємо, якщо її немає (recursive не
-  // повертає помилки, коли тека вже існує).
   await node.fs.promises.mkdir(dir, { recursive: true });
 
   try {
-    // 2. Прапорець "wx": створити файл, але не записувати,
-    // якщо він уже є.
     await node.fs.promises.writeFile(filePath, INITIAL_CONTENT, {
       encoding: "utf-8",
       flag: "wx",
@@ -44,8 +33,6 @@ export async function ensureTasksFile() {
   } catch (err) {
     if (err.code !== "EEXIST") throw err;
 
-    // 3. Файл уже був - залишаємо його без змін, але
-    // перевіряємо, що це справді файл, а не тека.
     const info = await node.fs.promises.stat(filePath);
     if (!info.isFile()) {
       throw new Error("tasks.json не є файлом: " + filePath);
